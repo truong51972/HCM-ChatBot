@@ -1,0 +1,77 @@
+.chat-message {
+  max-width: 70%;
+  margin: 8px 0;
+  padding: 10px 16px;
+  border-radius: 16px;
+  font-size: 16px;
+  word-break: break-word;
+  display: inline-block;
+}
+.user-message {
+  background: #e3f2fd;
+  color: #222;
+  float: right;
+  clear: both;
+  text-align: left;
+}
+.bot-message {
+  background: #1565c0;
+  color: #fff;
+  float: left;
+  clear: both;
+  text-align: left;
+}
+/* Xóa float sau mỗi tin nhắn để không bị lỗi layout */
+.chat-messages::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+.container {
+  display: flex;
+  height: 100vh;
+}
+.chat-section {
+  width: 60%;
+  background: #f5f5f5;
+  border-right: 1px solid #ddd;
+  display: flex;
+  flex-direction: column;
+}
+.chat-messages {
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto;
+}
+.chat-input {
+  display: flex;
+  border-top: 1px solid #ddd;
+  padding: 10px;
+}
+.chat-input input {
+  flex: 1;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+.chat-input button {
+  margin-left: 10px;
+  padding: 8px 16px;
+  border: none;
+  background: #007bff;
+  color: #fff;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.content-section {
+  width: 40%;
+  padding: 30px;
+  background: #fff;
+  overflow-y: auto;
+}

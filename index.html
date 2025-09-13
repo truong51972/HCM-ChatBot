@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Chatbot HCM</title>
+</head>
+<body>
+    <div class="container">
+        <div class="chat-section">
+            <div style="padding: 10px; border-bottom: 1px solid #ddd;">
+                <button id="setTokenBtn" type="button">Set Token</button>
+                <input type="text" id="tokenInput" placeholder="Nhập token..." style="display:none; margin-left:10px;" />
+                <button id="saveTokenBtn" type="button" style="display:none;">Lưu</button>
+            </div>
+            <div class="chat-messages" id="chatMessages">
+                <!-- Tin nhắn sẽ hiển thị ở đây -->
+            </div>
+            <form class="chat-input" id="chatForm">
+                <input type="text" id="chatInput" placeholder="Nhập tin nhắn..." autocomplete="off" />
+                <button type="submit">Gửi</button>
+            </form>
+        </div>
+        <div class="content-section" id="contentSection">
+            <h2>Nội dung text</h2>
+            <p>Đây là khu vực hiển thị nội dung text bên phải.</p>
+        </div>
+    </div>
+    <script src="./scripts.js"></script>
+</body>
+</html>
