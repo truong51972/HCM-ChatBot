@@ -142,12 +142,12 @@ html.dark {
   box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.25);
 }
 .btn.ghost {
-  background: rgba(99, 102, 241, 0.08);
-  color: #3730a3;
-  border-color: rgba(99, 102, 241, 0.25);
+  background: rgba(99, 102, 241, 0.12);
+  color: #1e1b4b;
+  border-color: rgba(99, 102, 241, 0.35);
 }
 .btn.ghost:hover {
-  background: rgba(99, 102, 241, 0.14);
+  background: rgba(99, 102, 241, 0.18);
 }
 
 /* Layout */
@@ -264,11 +264,15 @@ html.dark #extracted-content-section {
   border-color: #1f2937;
 }
 html.dark .user-message {
-  background: #0b3b4a;
-  color: #d1f2ff;
+  background: #0ea5e9;
+  color: #0b1220;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  box-shadow: 0 10px 20px rgba(14, 165, 233, 0.25);
 }
 html.dark .bot-message {
-  color: #fff;
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  box-shadow: 0 10px 20px rgba(124, 58, 237, 0.28);
 }
 /* Dark mode chat area refinements */
 html.dark .chat-messages {

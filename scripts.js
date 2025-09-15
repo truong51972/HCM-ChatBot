@@ -190,6 +190,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const tokenInput = document.getElementById("tokenInput");
   const saveTokenBtn = document.getElementById("saveTokenBtn");
   const useDefaultBtn = document.getElementById("useDefaultBtn");
+  const resetTokenBtn = document.getElementById("resetTokenBtn");
   const extracted_content_section = document.getElementById(
     "extracted-content-section"
   );
@@ -236,6 +237,15 @@ document.addEventListener("DOMContentLoaded", function () {
       GEMINI_API_KEY = DEFAULT_KEY;
       try {
         localStorage.setItem("gemini_api_key", DEFAULT_KEY);
+      } catch (_) {}
+      updateTokenUI();
+    });
+  }
+  if (resetTokenBtn) {
+    resetTokenBtn.addEventListener("click", function () {
+      GEMINI_API_KEY = "";
+      try {
+        localStorage.removeItem("gemini_api_key");
       } catch (_) {}
       updateTokenUI();
     });
