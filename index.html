@@ -1,49 +1,161 @@
 <!DOCTYPE html>
 <html lang="vi">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
     <title>Chatbot HCM</title>
-</head>
-<body>
-    <div class="container">
-        <div class="chat-section">
-            <div style="padding: 10px; border-bottom: 1px solid #ddd;">
-                <button id="setTokenBtn" type="button">Set Token</button>
-                <input type="text" id="tokenInput" placeholder="Gemini API Key..." style="display:none; margin-left:10px;" />
-                <button id="saveTokenBtn" type="button" style="display:none;">Lưu</button>
-            </div>
-            <div class="chat-messages" id="chatMessages">
-                <!-- Tin nhắn sẽ hiển thị ở đây -->
-            </div>
-            <form class="chat-input" id="chatForm">
-                <input type="text" id="chatInput" placeholder="Nhập tin nhắn..." autocomplete="off" />
-                <button type="submit">Gửi</button>
-            </form>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="header-inner">
+        <div class="brand">
+          <div class="logo" aria-hidden="true">💬</div>
+          <div class="brand-text">
+            <h1>HCM Chatbot</h1>
+            <p>Trợ giảng môn Tư tưởng Hồ Chí Minh</p>
+          </div>
         </div>
-        <div class="content-section" id="contentSection">
-            <h2>Nội dung trích dẫn</h2>
-            <hr>
-            <p id="extracted-content-section">
-                [Nội dung được trích dẫn]
-                <br>
-                <br>
-                <br>
-                Câu hỏi mẫu:
-                <ol>
-                    <li>Theo tư tưởng Hồ Chí Minh, mục tiêu về chế độ chính trị của chủ nghĩa xã hội ở Việt Nam là gì?</li>
-                    <li>Theo tư tưởng Hồ Chí Minh, nền kinh tế xã hội chủ nghĩa ở Việt Nam dựa trên những hình thức sở hữu nào?</li>
-                    <li>Theo tư tưởng Hồ Chí Minh, mối quan hệ giữa văn hóa với chính trị và kinh tế được xác định như thế nào?</li>
-                    <li>Theo Hồ Chí Minh, vì sao kinh tế phải đi trước văn hóa?</li>
-                    <li>Theo tư tưởng Hồ Chí Minh, động lực nào giữ vai trò quyết định trong việc thúc đẩy tiến trình cách mạng xã hội chủ nghĩa?</li>
-                    <li>Theo Hồ Chí Minh, muốn xây dựng chủ nghĩa xã hội, trước hết cần phải có những con người như thế nào?</li>
-                    <li>Quan điểm nào được Hồ Chí Minh cho là một trong những nét đặc sắc trong tư tưởng của Người về xây dựng chủ nghĩa xã hội?</li>
-                </ol>
-            </p>
+        <div class="token-tools">
+          <button id="setTokenBtn" type="button" class="btn ghost">
+            Set Token
+          </button>
+          <input type="text" id="tokenInput" placeholder="Gemini API Key..." />
+          <button
+            id="toggleThemeBtn"
+            type="button"
+            class="btn ghost"
+            title="Bật/Tắt Dark mode"
+          >
+            Dark
+          </button>
+          <button
+            id="useDefaultBtn"
+            type="button"
+            class="btn ghost"
+            title="Dùng token mẫu có sẵn"
+          >
+            Dùng token mẫu
+          </button>
+          <button id="saveTokenBtn" type="button" class="btn primary">
+            Lưu
+          </button>
         </div>
-    </div>
+      </div>
+      <div class="hero">
+        <p>
+          Đặt câu hỏi ngắn gọn. Chatbot sẽ tham chiếu nội dung, trích dẫn và trả
+          lời súc tích.
+        </p>
+      </div>
+    </header>
+
+    <main class="container">
+      <section class="chat-section" aria-label="Khu vực trò chuyện">
+        <div class="chat-messages" id="chatMessages" aria-live="polite">
+          <!-- Tin nhắn sẽ hiển thị ở đây -->
+        </div>
+        <button
+          type="button"
+          id="scrollBottomBtn"
+          class="scroll-bottom"
+          aria-label="Cuộn xuống cuối"
+          title="Cuộn xuống cuối"
+        >
+          ▼
+        </button>
+        <form class="chat-input" id="chatForm">
+          <input
+            type="text"
+            id="chatInput"
+            placeholder="Nhập tin nhắn..."
+            autocomplete="off"
+          />
+          <button type="submit" class="btn primary">Gửi</button>
+        </form>
+        <div class="quick-prompts" id="quickPrompts" aria-label="Gợi ý nhanh">
+          <button
+            class="chip"
+            data-text="Theo tư tưởng Hồ Chí Minh, mục tiêu về chế độ chính trị là gì?"
+          >
+            Mục tiêu chính trị?
+          </button>
+          <button
+            class="chip"
+            data-text="Những hình thức sở hữu kinh tế theo tư tưởng Hồ Chí Minh?"
+          >
+            Sở hữu kinh tế?
+          </button>
+          <button
+            class="chip"
+            data-text="Vì sao kinh tế phải đi trước văn hóa theo Hồ Chí Minh?"
+          >
+            Kinh tế trước văn hóa?
+          </button>
+          <button
+            class="chip"
+            data-text="Động lực quyết định của chủ nghĩa xã hội theo Hồ Chí Minh?"
+          >
+            Động lực quyết định?
+          </button>
+        </div>
+      </section>
+      <aside
+        class="content-section"
+        id="contentSection"
+        aria-label="Nội dung trích dẫn"
+      >
+        <h2>Nội dung trích dẫn</h2>
+        <hr />
+        <div class="extract-toolbar">
+          <span class="badge" id="extracted-title">Chưa có trích dẫn</span>
+          <button
+            type="button"
+            class="btn ghost"
+            id="copyExtractBtn"
+            title="Sao chép nội dung trích dẫn"
+          >
+            Sao chép
+          </button>
+        </div>
+        <p id="extracted-content-section">[Nội dung được trích dẫn]</p>
+        <div id="sampleQuestions">
+          <p style="margin-top: 12px; margin-bottom: 6px">Câu hỏi mẫu:</p>
+          <ol>
+            <li>
+              Theo tư tưởng Hồ Chí Minh, mục tiêu về chế độ chính trị của chủ
+              nghĩa xã hội ở Việt Nam là gì?
+            </li>
+            <li>
+              Theo tư tưởng Hồ Chí Minh, nền kinh tế xã hội chủ nghĩa ở Việt Nam
+              dựa trên những hình thức sở hữu nào?
+            </li>
+            <li>
+              Theo tư tưởng Hồ Chí Minh, mối quan hệ giữa văn hóa với chính trị
+              và kinh tế được xác định như thế nào?
+            </li>
+            <li>Theo Hồ Chí Minh, vì sao kinh tế phải đi trước văn hóa?</li>
+            <li>
+              Theo tư tưởng Hồ Chí Minh, động lực nào giữ vai trò quyết định
+              trong việc thúc đẩy tiến trình cách mạng xã hội chủ nghĩa?
+            </li>
+            <li>
+              Theo Hồ Chí Minh, muốn xây dựng chủ nghĩa xã hội, trước hết cần
+              phải có những con người như thế nào?
+            </li>
+            <li>
+              Quan điểm nào được Hồ Chí Minh cho là một trong những nét đặc sắc
+              trong tư tưởng của Người về xây dựng chủ nghĩa xã hội?
+            </li>
+          </ol>
+        </div>
+      </aside>
+    </main>
+
+    <footer class="site-footer">
+      <p>© 2025 HCM Chatbot • Gemini API</p>
+    </footer>
     <script src="./data.js"></script>
     <script src="./scripts.js"></script>
-</body>
+  </body>
 </html>
